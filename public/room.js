@@ -339,7 +339,6 @@ function connectRoom()
         buttonMute.value = response[0].isMuted;
         document.getElementById('footerModalProfile').appendChild(buttonMute);
 
-
         addClickButtonMute(buttonMute, response[0].userName, response[0].isMuted, selectList, reasonInput);
 
         var buttonBlock = document.createElement('button');

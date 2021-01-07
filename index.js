@@ -42,7 +42,9 @@ const rooms = { details: [
       }
 ] }
 const users = { details: [] }
-const blackList = { list : [] }
+const blackList = { list : [
+
+] }
 
 app.get('/', (req, res) => {
   res.render('firstPage');
@@ -193,7 +195,7 @@ socket.on('addMutedUser', (roomID, userName, isMuted, timeStart, period, reason 
   
   var userSocket;
   for (var i = 0; i < users.details.length; i++) {
-    if(users.details[i].roomID == roomID && users.details[i].userName == "petrisorcraciun") {
+    if(users.details[i].roomID == roomID && users.details[i].userName == userName) {
       users.details[i].isMuted    = isMuted;
       users.details[i].mTimeStart = timeStart;
       users.details[i].mTime      = period;
@@ -201,6 +203,24 @@ socket.on('addMutedUser', (roomID, userName, isMuted, timeStart, period, reason 
       userSocket = users.details[i].socketID;
     }
   }
+
+
+  blackList.list.push(
+    {
+        "roomID"        : roomID,
+        "userName"      : userName,
+        "isMuted"       : isMuted,
+        "mTimeStart"    : timeStart,
+        "mTime"         : period,
+        "isBlocked"     : "",
+        "reasonBlocked" : "",
+        "timeBlocked"   : "",
+    }
+  )
+
+
+  console.log(blackList);
+  console.log(users);
 
   if(isMuted == 1)
     io.to(userSocket).emit('addMutedUser', 'User: ' + userName + " was silenced for a period of " + period + " minutes.")
