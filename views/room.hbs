@@ -1,0 +1,256 @@
+
+
+<p id="members" class="text-center font-bold text-gray-700"></p>
+
+
+
+<div style="width: 75px; position: absolute; margin-top: 1%; margin-left: 10px" class="">
+<button class="bg-blue-500 hover:bg-blue-700 btn-sm text-white font-bold py-1 rounded-md flex-shrink-1" data-toggle="modal" data-target="#chatMessage" id="btnChat"
+    style="width: 75px; "><i class="fa fa-comments fa-3x"></i>
+    <span class="notification-badge badge badge-warning" style="margin-top: -15%; position: absolute;width: 30px; height: 20px; font-size: 12px"><p id="unreadMessagesCount">0</p> </span>
+</button>
+
+<button class="bg-blue-500 hover:bg-blue-700 btn-sm text-white font-bold py-1 mt-2 rounded-md flex-shrink-1" data-toggle="modal" data-target="#fileModal" id="btnFiles"
+    style="width: 75px; "><i class="fa fa-archive fa-3x"></i>
+    <span class="notification-badge badge badge-warning" style="margin-top: -15%; position: absolute;width: 30px; height: 20px; font-size: 12px"><p id="unreadMessagesCount">0</p> </span>
+</button>
+
+
+<button class="bg-blue-500 hover:bg-blue-700 btn-sm text-white font-bold py-1 rounded-md flex-shrink-1 mt-2" data-toggle="modal" data-target="#mMembers" 
+    style="width: 75px; "><i class="fa fa-list fa-3x"></i>
+</button>
+
+    <div style="width: 75px; " class="mt-3 text-center">
+      <h6> <font color="green"> Online: </font><br> <span id="connectCount" ></span></h6>
+</div>
+</div>
+
+
+<div class="modal " id="chatMessage" tabindex="-1" role="dialog" >
+  <div class="modal-dialog modal-lg" role="document" style="height: 90%;">
+    <div class="modal-content" style="height: 90%;">
+      <div class="modal-header">
+        <h5 class="modal-title">Chat</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="max-height: calc(83%);">
+      
+      
+<ul id="messages" class="p-2 flex flex-col flex-1 h-full max-h-full overflow-y-auto"></ul> 
+
+        
+<section class="bg-gray-200 rounded-lg p-2"  id="messageBody" style="overflow: hidden">
+ 
+  <form id="newMessageForm" action="" class=" flex">
+    <input
+      class="bg-white flex-1 mr-4 focus:outline-none focus:shadow-outline border border-gray-300 w-3/4 rounded-md py-2 px-4 appearance-none leading-normal inp"
+      placeholder="Start typing your message..." id="m" autocomplete="off" />
+    <button class="bg-green-700 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-md w-0/4 flex-shrink-1" id="btnSendMessage">
+       <i class="fa fa-paper-plane"></i>
+    </button>
+    <p id="messageMuted" class="mt-2"></p>
+  </form>
+</section>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+<div class="modal" id="modalDates" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" style="background-color: white;height: 100%;width: 100%" >
+  <div class="modal-dialog modal-lg" role="document" >
+    <div class="modal-content" >
+      <div class="modal-body">
+<div class="form-group">
+	<label for="email">Nume:</label>
+		<input id="personNameInput" type="text" class="form-control" required autofocus>
+	</div>
+    <div class="form-group">
+		<label for="password">Email: </label>
+		<input type="email"  id="emailAddress" class="form-control"  required>
+	</div>
+	<div class="form-group pt-4">
+		<button type="submit" class="btn btn-primary btn-block" id="btnConnect">
+			Conectare
+		</button>
+	</div>
+        </div>
+    </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="mPassword" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" style="background-color: white;height: 100%;width: 100%" >
+  <div class="modal-dialog" role="document" >
+    <div class="modal-content" >
+      <div class="modal-body">
+<div class="form-group">
+	<label for="passwordRoomInput">Password room:</label>
+		<input id="passwordRoomInput" type="password" class="form-control" required autofocus>
+    <small id="errPassword" class="form-text text-danger text-center"></small>
+	</div>
+	<div class="form-group pt-4">
+		<button type="submit" class="btn btn-primary btn-block" id="btnCheckPassword">
+			Conectare
+		</button>
+	</div>
+        </div>
+    </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal" id="mBlocked" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" style="background-color: white;height: 100%;width: 100%" >
+  <div class="modal-dialog" role="document" >
+    <div class="modal-content" >
+      <div class="modal-body">
+        <div class="text-center">
+          <i class="fa fa-exclamation-triangle fa-4x" style="color: red"></i>
+        </div>
+        <hr>
+            <p id="textBlocked"></p>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<style>
+  .dot {
+  height: 10px;
+  width: 10px;
+  background-color: green;
+  border-radius: 50%;
+  margin-right: 5px;
+  display: inline-block;
+}
+</style>
+
+
+
+<div class="modal" id="mMembers" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document" >
+    <div class="modal-content" >
+      <div class="modal-header">
+        List
+      </div>
+      <div class="modal-body">
+        <h6>Connected users:</h6>
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <div id="list" class="row d-flex justify-content-center" ></div>
+          </div>
+        </div>
+        <hr>
+        <h6>Blocked users:</h6>
+        <div class="card shadow-sm">
+          <div class="card-body">
+              <div id="blockedList" class="row d-flex justify-content-center" ></div>
+          </div>
+        </div>        
+      </div>
+      </div>
+    </div>
+</div>
+
+
+
+
+
+<style>.list-group-item
+{
+  overflow:hidden;  
+  position: relative;
+  display: block;
+  padding: 0px 5px;
+  margin-bottom: -1px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}</style>
+
+
+<div aria-live="polite" aria-atomic="true"  >
+  <div class="toast" style="position: absolute; top: 0; right: 0;width: 300px;" data-delay="3000">
+    <div class="toast-header">
+      <i class="fa fa-plus"></i> 
+      <strong class="mr-auto"> Notification</strong>
+      <small>Now</small>
+      <button type="button" class="btn-close" data-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+        <span id="messageNotification"></span>
+    </div>
+  </div>
+</div>
+
+<script>
+var returnJson    = '{{ detailRoom }}'
+var dataJSON      = JSON.parse(returnJson.replace(/&quot;/g,'"'));
+
+
+</script>
+
+<div class="modal" id="fileModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document" >
+    <div class="modal-content" >
+      <div class="modal-header">
+        Files
+      </div>
+      <div class="modal-body p-0">
+        
+      </div>
+       
+      <div class="card-footer">
+          <button id="btnModalAllUsers" class="bg-blue-700 hover:bg-blue-600 text-white font-bold rounded-md mb-2 btn-sm" > Open modal all users</button> 
+      </div>
+    
+      </div>
+    </div>
+</div>
+
+<div class="modal" id="userProfile" tabindex="-1" role="dialog">
+  <div class="modal-dialog " role="document" >
+    <div class="modal-content" >
+      <div class="modal-header">
+         <span id="nameUser"></span> 
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <table style="width: 100%" id="tableProfile"></table>
+      </div>
+      <div class="modal-footer d-flex justify-content-center" id="footerModalProfile" >
+          
+      </div>
+      </div>
+    </div>
+</div>
+
+
+
+
+<script src="/socket.io/socket.io.js" defer></script>
+<script src="/room.js" defer></script>
+<script src="//threejs.org/build/three.js"></script>
+
+<audio id="myAudio">
+  <source src="../notification.mp3" type="audio/mpeg">
+</audio>
+
+
+<script>
+  
+  
+
+</script>

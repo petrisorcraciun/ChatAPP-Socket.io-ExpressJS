@@ -1,0 +1,33 @@
+{
+  "name": "chatAppSocket",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Craciun Petrisor",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "derange": "^1.0.1",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.1.0",
+    "jquery": "^3.5.1",
+    "mkdirp": "^1.0.4",
+    "mysql": "^2.18.1",
+    "node-fetch": "^2.6.1",
+    "node-localstorage": "^2.1.6",
+    "random-avatar-generator": "^2.0.0",
+    "socket.io": "^2.3.0",
+    "three": "^0.122.0",
+    "uuid": "^8.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
