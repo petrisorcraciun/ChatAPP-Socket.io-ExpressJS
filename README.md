@@ -42,7 +42,7 @@ npm run start
 
 ## Demo  ⚡
 
-<img src="https://raw.githubusercontent.com/petrisorcraciun/ChatAPP-Socket.io-ExpressJS/main/images/gif.gif" height="500px" width="500px">
+<img src="https://raw.githubusercontent.com/petrisorcraciun/ChatAPP-Socket.io-ExpressJS/main/images/gif.gif" height="500px" >
 
 ## Contact 📝
 If you need any help, you can connect with me.
