@@ -11,7 +11,6 @@ connect.addEventListener('click', () => {
     localStorage.setItem("personName"  , document.getElementById('personName').value);
     localStorage.setItem("emailAddress", document.getElementById('emailAddress').value);
     localStorage.setItem("username"    , document.getElementById('username').value);
-    localStorage.setItem("token"       , getHash(document.getElementById('username').value));
     window.location.href = "/home";
 })
 
