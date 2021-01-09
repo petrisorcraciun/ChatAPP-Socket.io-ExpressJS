@@ -364,6 +364,70 @@ function connectRoom()
         });
       }
 
+    let isDrawing = false;
+    let x = 0;
+    let y = 0;
+
+    /* Get canvas and context */
+    const canvas = document.getElementById('sheet');
+    var context = canvas.getContext('2d');
+
+    window.addEventListener('resize', resizeCanvas, false);
+
+    function resizeCanvas() {
+            canvas.width  = $("#contentDrawTable").width();
+            canvas.height = $("#contentDrawTable").height();
+    }
+    resizeCanvas();
+
+
+    /* Add the event listeners for mousedown, mousemove, and mouseup */
+    canvas.addEventListener('mousedown', e => {
+        /* Drawing begins */
+        x = e.offsetX;
+        y = e.offsetY;
+        isDrawing = true;
+    });
+    
+    canvas.addEventListener('mousemove', e => {
+        /* Drawing continues */
+        if (isDrawing === true) {
+            drawLine(context, x, y, e.offsetX, e.offsetY);
+            x = e.offsetX;
+            y = e.offsetY;
+        }
+    });
+
+    document.getElementById('clearDrawTable').addEventListener('click', function() {
+      context.clearRect(0, 0, canvas.width, canvas.height);
+    }, false);
+    
+    window.addEventListener('mouseup', e => {
+        if (isDrawing === true) {
+            drawLine(context, x, y, e.offsetX, e.offsetY);
+            x = 0;
+            y = 0;
+            isDrawing = false;
+        }
+    });
+
+   
+
+    function drawLine(context, x1, y1, x2, y2,color = selected_color,from_server = false) {
+      var roomID = dataJSON.list[0].roomID;
+
+      if(!from_server)
+          socket.emit('update_canvas', JSON.stringify({roomID, x1,y1,x2,y2,color}));
+      
+      context.beginPath();
+      context.strokeStyle = color;
+      context.lineWidth = 5;
+      context.lineCap = 'round'
+      context.moveTo(x1, y1);
+      context.lineTo(x2, y2);
+      context.stroke();
+      context.closePath();
+      }
 
       socket.on('joined-room'       ,  onRoomJoin)
       socket.on('chat-message'      ,  onNewMessage)
@@ -378,6 +442,23 @@ function connectRoom()
           updateUsersList(users)
           updateCountUsers(users)
       })
+      socket.on('update_canvas',function(data){
+
+        
+          let {roomID, x1,y1,x2,y2,color} = JSON.parse(data);
+
+          if(roomID == dataJSON.list[0].roomID)
+            drawLine(context,x1,y1,x2,y2,color,true);
+      });
       
 }
+
+
+let selected_color = 'red';
+function selectColor(color){
+    document.getElementsByClassName(selected_color)[0].classList.remove('selected');
+    document.getElementsByClassName(color)[0].classList.add('selected');    
+    selected_color = color;
+}
+
 

@@ -42,9 +42,9 @@ const rooms = { details: [
       }
 ] }
 const users = { details: [] }
-const blackList = { list : [
+const blackList = { list : [] }
 
-] }
+const history = [];
 
 app.get('/', (req, res) => {
   res.render('firstPage');
@@ -135,8 +135,6 @@ io.on('connection', socket => {
     }
   }
 
-  console.log(blackListArray);
-
   users.details.push({
       "roomID"        : roomID,
       "userName"      : userName,
@@ -155,9 +153,12 @@ io.on('connection', socket => {
   });
 
 
-  console.log(Object.values(users.details).filter(user => user.roomID === roomID));
+
+  for(let item of history)
+      socket.emit('update_canvas',item);
 
 
+    
   if (!userToken) {
     socket.emit('joined-room', users.details[users.details.length-1].token)
   }
@@ -218,10 +219,6 @@ socket.on('addMutedUser', (roomID, userName, isMuted, timeStart, period, reason 
     }
   )
 
-
-  console.log(blackList);
-  console.log(users);
-
   if(isMuted == 1)
     io.to(userSocket).emit('addMutedUser', 'User: ' + userName + " was silenced for a period of " + period + " minutes.")
   else 
@@ -240,6 +237,12 @@ socket.on('userDetails', (userName, roomID, userWhoAsk) => {
     io.to(userSocket).emit('userDetailsReturn', Object.values(users.details).filter(user => user.roomID === roomID && user.userName === userName))
 })
 
+socket.on('update_canvas',function(data){
+  history.push(data);
+
+  io.in(JSON.parse(data).roomID).emit('update_canvas', data)
+});
+
 
 
 socket.on('disconnect', (reason) => {
@@ -253,6 +256,7 @@ socket.on('disconnect', (reason) => {
 
 
     if (reason === 'transport close') {
+
       socket.to(disconnectedUser.roomID).emit('user-disconnected', disconnectedUser.userName + ' left the room');
       //delete users[disconnectedUser.socketID]
       users.details.forEach((element, index) => {
