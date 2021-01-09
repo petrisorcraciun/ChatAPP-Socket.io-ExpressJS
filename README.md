@@ -1,6 +1,6 @@
 ## About 
     This is a simple realtime chat application made to learn socket.io and express js.
-I started from <a href="https://github.com/stefanalexlupu/secret-santa"> secret-santa </a>
+I started from <a href="https://github.com/stefanalexlupu/secret-santa"> secret-santa </a>.
 
 ## Requirments 
 To try this project, you must have **NodeJS** installed on your computer. You can learn more about NodeJS [here](https://github.com/nodejs/node).
@@ -56,4 +56,7 @@ If you need any help, you can connect with me.
 
 If you found this project useful, then please consider giving it a :star: on Github and sharing it with your friends via social media.
 
-"# ChatAPP-Socket.io-ExpressJS" 
+## Credits
+
+- <a href="https://github.com/stefanalexlupu/secret-santa"> Secret Santa </a>
+- <a href="https://github.com/prajwalx/collaborative-drawing-tool"> Collaborative Drawing Tool </a>.
